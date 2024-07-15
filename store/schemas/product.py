@@ -35,3 +35,9 @@ class ProductUpdate(BaseSchemaMixin):
 
 class ProductUpdateOut(ProductOut):
     ...
+
+async def test_usecases_update_should_return_success(product_id, product_min):
+    produtos = session.query(Produto).filter(Produto.preco >= 5000, Produto.preco <= 8000).all()
+    result = await product_usecase.update(id=product_id, body=product_up)
+
+    assert isinstance(result, ProductUpdateOut)
